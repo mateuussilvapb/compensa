@@ -1,0 +1,29 @@
+@use "sass:color";
+@import "utils/variables";
+
+.button-style {
+  position: relative;
+  background: linear-gradient(135deg, $verde_principal, $azul_principal);
+  color: #fff;
+  overflow: hidden; // impede ::after de vazar
+  z-index: 0; // cria contexto para o ::after
+
+  // camada de escurecimento
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      adjust-color($verde_principal, $lightness: -10%),
+      adjust-color($azul_principal, $lightness: -10%)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1; // fica atrás do texto
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}

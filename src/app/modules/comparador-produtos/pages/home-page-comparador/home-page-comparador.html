@@ -1,0 +1,25 @@
+<div class="flex flex-row justify-content-center align-items-center font-semibold text-2xl mb-3">
+  Compare Produtos
+</div>
+<div class="flex w-full flex-column md:flex-row md:px-8">
+  <div class="md:w-full md:pr-2">
+    <app-produto-comparado [form]="formProduto1" [indiceProduto]="1"></app-produto-comparado>
+  </div>
+  <div class="md:w-full md:pl-2 md:pt-0 pt-3">
+    <app-produto-comparado [form]="formProduto2" [indiceProduto]="2"></app-produto-comparado>
+  </div>
+</div>
+<div class="flex flex-row justify-content-center my-3">
+  <button pButton class="button-style" [disabled]="formProduto1.invalid || formProduto2.invalid" (click)="onCompararProdutos()">
+    <i class="pi pi-calculator" pButtonIcon></i>
+    <span pButtonLabel>Comparar Produtos</span>
+  </button>
+</div>
+@if (showCardProdutosComparados) {
+  <div class="md:px-8">
+    <app-produtos-comparados
+      [infoProduto1]="dataProduto1"
+      [infoProduto2]="dataProduto2"
+    ></app-produtos-comparados>
+  </div>
+}

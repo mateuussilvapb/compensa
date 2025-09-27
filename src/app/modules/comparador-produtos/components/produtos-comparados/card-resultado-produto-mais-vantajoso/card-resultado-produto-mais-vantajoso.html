@@ -1,0 +1,25 @@
+  <div class="resultado-comparacao border-round mt-3 p-3 flex flex-row justify-content-center align-items-center">
+    @if (produtosComMesmoCustoPorKg) {
+      <i class="pi pi-dollar mr-2 font-color-produto text-lg font-medium"></i>
+      <span class="text-lg font-medium">
+        Os produtos têm o mesmo custo-benefício!
+      </span>
+    } @else if (produtoMaisVantajoso != null && !produtosComMesmoCustoPorKg) {
+      <div class="flex flex-column justify-content-center align-items-center">
+        <div class="flex flex-row justify-content-center align-items-center font-color-produto text-lg font-medium">
+          <i class="pi pi-dollar mr-1 font-color-produto text-lg font-medium"></i>
+          <span>
+            {{produtoMaisVantajoso.nomeProduto}} é mais vantajoso!
+          </span>
+        </div>
+        <span>
+          Economia de <span class="font-color-produto font-semibold">{{ percentualGanho?.toFixed(1) }}%</span> e de <span class="font-color-produto font-semibold">{{ valorGanho | currency:'BRL' }}/kg</span>
+        </span>
+      </div>
+    } @else {
+      <i class="pi pi-exclamation-triangle mr-2 text-lg font-medium text-red-500"></i>
+      <span class="text-lg font-medium text-red-500	">
+        Erro ao comparar produtos. Tente novamente.
+      </span>
+    }
+  </div>

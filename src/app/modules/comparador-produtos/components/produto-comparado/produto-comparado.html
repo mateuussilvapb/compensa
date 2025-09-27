@@ -1,0 +1,26 @@
+<p-card>
+  <!-- Título -->
+  <ng-template #header>
+    <div class="flex flex-row pt-3 pl-3 text-lg">
+      <i class="pi pi-circle-on mr-2 align-content-center" [ngClass]="iconClass"></i>
+      <span class="font-bold"> Produto {{ indiceProduto }}</span>
+    </div>
+  </ng-template>
+  <form [formGroup]="form" class="mt-2">
+    <!-- Nome do Produto -->
+    <div class="flex flex-column">
+      <label for="nome-produto" class="font-medium mb-1">Nome do Produto</label>
+      <input id="nome-produto" type="text" pInputText formControlName="nomeProduto" placeholder="Informe o nome do produto..." class="surface-50" />
+    </div>
+    <!-- Preço do Produto -->
+    <div class="flex flex-column my-4">
+      <label for="preco-produto" class="font-medium mb-1">Preço (R$)</label>
+       <input step="0.01" currencyMask id="preco-produto" type="text" pInputText formControlName="precoProduto" placeholder="Informe o preço do produto..." [options]="optionsCurrencyMask" class="surface-50"/>
+    </div>
+    <!-- Peso do Produto -->
+    <div class="flex flex-column">
+      <label for="peso-produto" class="font-medium mb-1">Peso (kg)</label>
+      <input step="0.01" currencyMask id="peso-produto" type="text" pInputText formControlName="pesoProduto" placeholder="Informe o peso do produto..." [options]="optionsCurrencyMaskToWight" class="surface-50"/>
+    </div>
+  </form>
+</p-card>

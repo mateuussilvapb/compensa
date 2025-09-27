@@ -1,0 +1,30 @@
+<p-card>
+  <ng-template #header>
+    <div class="flex flex-row justify-content-center py-3 text-xl font-semibold">
+      Resultado da Comparação
+    </div>
+  </ng-template>
+  <div>
+    <div class="flex w-full flex-column md:flex-row">
+      <div class="md:w-full md:pr-2">
+        <app-card-apresentacao-produto-comparado
+          [dadosProduto]="this.infoProduto1"
+          [produtosComMesmoCustoPorKg]="produtosComMesmoCustoPorKg"
+        ></app-card-apresentacao-produto-comparado>
+      </div>
+      <div class="md:w-full md:pl-2 md:pt-0 pt-3">
+        <app-card-apresentacao-produto-comparado
+          [dadosProduto]="this.infoProduto2"
+          [produtosComMesmoCustoPorKg]="produtosComMesmoCustoPorKg"
+        ></app-card-apresentacao-produto-comparado>
+      </div>
+    </div>
+  </div>
+
+  <app-card-resultado-produto-mais-vantajoso
+    [valorGanho]="valorGanho"
+    [percentualGanho]="percentualGanho"
+    [produtoMaisVantajoso]="produtoMaisVantajoso"
+    [produtosComMesmoCustoPorKg]="produtosComMesmoCustoPorKg"
+  ></app-card-resultado-produto-mais-vantajoso>
+</p-card>

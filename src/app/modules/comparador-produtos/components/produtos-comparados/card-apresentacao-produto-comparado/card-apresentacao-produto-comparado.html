@@ -1,0 +1,19 @@
+<div
+  class="flex flex-column p-2 pl-3 border-round"
+  [ngClass]="dadosProduto.isMaisVantajoso ? 'resultado-produto-card-mais-vantajoso' : 'resultado-produto-card'"
+>
+  <!-- Nome do Produto -->
+  <div class="flex flex-row font-medium text-lg align-items-center">
+    @if (dadosProduto.isMaisVantajoso) {
+      <i class="pi pi-chart-line mr-1 text-green-600 font-medium"></i>
+    }
+    {{dadosProduto.nomeProduto}}
+  </div>
+
+  <div class="my-3 text-sm text-500">
+    {{dadosProduto.precoProduto | currency: 'BRL' }} por {{dadosProduto.pesoProduto}}kg
+  </div>
+  <div class="font-medium" [ngClass]="dadosProduto.isMaisVantajoso || produtosComMesmoCustoPorKg ? 'font-color-green' : 'text-red-500'">
+    {{getPrecoPorKg() | currency: 'BRL'}}/kg
+  </div>
+</div>

@@ -1,0 +1,27 @@
+.footer-style {
+  width: 100% !important;
+  height: 10vh !important;
+  background-color: white;
+  z-index: 1000000;
+  border-top: 1px solid rgb(225, 225, 225);
+
+  .button-footer {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit; // mantém cor herdada
+
+    &:hover {
+      background: #c4eeff;
+    }
+
+    &.active {
+      background: #00b77e; // verde, igual na sua imagem
+      color: #fff;
+
+      i,
+      span {
+        color: #fff;
+      }
+    }
+  }
+}
