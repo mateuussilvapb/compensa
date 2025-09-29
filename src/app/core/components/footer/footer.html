@@ -7,8 +7,10 @@
         routerLinkActive="active"
         class="flex flex-column justify-content-center align-items-center border-round button-footer font-medium h-full"
       >
-        <i class="pi pi-chart-line mb-3 font-medium"></i>
-        <span>Comparador</span>
+        <i class="pi pi-chart-line font-medium" title="Comparador" [ngClass]="isMobile ? 'text-xl' : ''"></i>
+        @if(isDesktop) {
+          <span class="text-center mt-3">Comparador</span>
+        }
       </a>
     </div>
 
@@ -19,8 +21,10 @@
         routerLinkActive="active"
         class="flex flex-column justify-content-center align-items-center border-round button-footer font-medium h-full"
       >
-        <i class="pi pi-calculator mb-3 font-medium"></i>
-        <span>Regra de Três</span>
+        <i class="pi pi-calculator font-medium" title="Regra de Três" [ngClass]="isMobile ? 'text-xl' : ''"></i>
+        @if(isDesktop) {
+          <span class="text-center mt-3">Regra de Três</span>
+        }
       </a>
     </div>
 
@@ -31,8 +35,10 @@
         routerLinkActive="active"
         class="flex flex-column justify-content-center align-items-center border-round button-footer font-medium h-full"
       >
-        <i class="pi pi-list mb-3 font-medium"></i>
-        <span>Lista de Compras</span>
+        <i class="pi pi-list font-medium" title="Lista de Compras" [ngClass]="isMobile ? 'text-xl' : ''"></i>
+        @if(isDesktop) {
+          <span class="text-center mt-3">Lista de Compras</span>
+        }
       </a>
     </div>
   </div>
