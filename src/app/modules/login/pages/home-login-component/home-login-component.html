@@ -1,0 +1,21 @@
+<div class="flex flex-column h-screen px-4">
+  <!-- topo -->
+  <app-top [showSubtitle]="true"></app-top>
+
+  <!-- conteúdo -->
+  <section class="flex flex-1 justify-content-center align-items-start mt-8">
+    <p-card class="w-full md:w-6 lg:w-4 xl:w-3 md:mt-8">
+      <ng-template #header>
+        <div class="text-center mt-3 text-xl font-semibold">
+          Login
+        </div>
+      </ng-template>
+      <section>
+        <div class="text-center w-full">Faça login para comparar produtos e fazer sua listas de compras</div>
+        <div>
+          <button pButton type="button" icon="pi pi-google" class="w-full mt-4 button-style" (click)="login()">Login com Google</button>
+        </div>
+      </section>
+    </p-card>
+  </section>
+</div>
