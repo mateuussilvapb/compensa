@@ -9,7 +9,6 @@ import { ProdutoInfoDTO } from '../../interfaces/produto-info.dto';
   selector: 'app-home-page-comparador',
   imports: [ProdutoComparado, ButtonModule, ProdutosComparados],
   templateUrl: './home-page-comparador.html',
-  styleUrls: ['./home-page-comparador.scss'],
 })
 export class HomePageComparador implements OnInit {
   public formProduto1!: FormGroup;

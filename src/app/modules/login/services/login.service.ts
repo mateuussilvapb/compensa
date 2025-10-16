@@ -35,6 +35,7 @@ export class LoginService {
     this.oAuthService.revokeTokenAndLogout();
     this.oAuthService.logOut();
     this.profile.set(null);
+    localStorage.clear();
     this.router.navigate(['/']);
   }
 
