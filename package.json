@@ -30,6 +30,7 @@
     "@angular/router": "^20.3.0",
     "@primeuix/themes": "^1.2.3",
     "angular-oauth2-oidc": "^20.0.2",
+    "firebase": "^12.4.0",
     "ng2-currency-mask": "^13.0.3",
     "primeflex": "^4.0.0",
     "primeicons": "^7.0.0",
