@@ -9,7 +9,7 @@
         <div class="flex flex-row justify-content-center align-items-center font-color-produto text-lg font-medium">
           <i class="pi pi-dollar mr-1 font-color-produto text-lg font-medium"></i>
           <span>
-            {{produtoMaisVantajoso.nomeProduto}} é mais vantajoso!
+            {{produtoMaisVantajoso.nomeProduto || 'Produto ' + indice}} é mais vantajoso!
           </span>
         </div>
         <span>

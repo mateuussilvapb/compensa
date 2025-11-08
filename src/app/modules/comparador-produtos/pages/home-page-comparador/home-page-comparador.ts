@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProdutoComparado } from '../../components/produto-comparado/produto-comparado';
-import { ButtonModule } from 'primeng/button';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { ProdutoComparado } from '../../components/produto-comparado/produto-comparado';
 import { ProdutosComparados } from '../../components/produtos-comparados/produtos-comparados';
 import { ProdutoInfoDTO } from '../../interfaces/produto-info.dto';
 
@@ -32,7 +32,7 @@ export class HomePageComparador implements OnInit {
 
   createFormProduto() {
     return this.fb.group({
-      nomeProduto: [null, [Validators.required]],
+      nomeProduto: [null],
       precoProduto: [null, [Validators.required, Validators.min(0.01)]],
       pesoProduto: [null, [Validators.required, Validators.min(0.01)]],
     });

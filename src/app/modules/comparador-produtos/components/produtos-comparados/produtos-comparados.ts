@@ -22,6 +22,7 @@ export class ProdutosComparados implements OnChanges {
   public valorGanho: number | null = null;
   public percentualGanho: number | null = null;
   public produtosComMesmoCustoPorKg: boolean = false;
+  public indiceProdutoMaisVantajoso: number = 0;
   public produtoMaisVantajoso: ProdutoInfoDTO | null = null;
   public produtoMenosVantajoso: ProdutoInfoDTO | null = null;
 
@@ -49,6 +50,9 @@ export class ProdutosComparados implements OnChanges {
       this.produtosIguaisEmTermosDePreco();
       return;
     }
+
+    const isProduto1MaisVantajoso = preco1 < preco2;
+    this.indiceProdutoMaisVantajoso = isProduto1MaisVantajoso ? 1 : 2;
 
     const maisVantajoso = preco1 < preco2 ? this.infoProduto1 : this.infoProduto2;
     const menosVantajoso = preco1 < preco2 ? this.infoProduto2 : this.infoProduto1;

@@ -11,8 +11,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './card-resultado-produto-mais-vantajoso.scss'
 })
 export class CardResultadoProdutoMaisVantajoso {
+  @Input({required: true}) indice!: number;
+  @Input({required: true}) valorGanho: number | null = null;
+  @Input({required: true}) percentualGanho: number | null = null;
   @Input({required: true}) produtosComMesmoCustoPorKg: boolean = false;
   @Input({required: true}) produtoMaisVantajoso: ProdutoInfoDTO | null = null;
-  @Input({required: true}) percentualGanho: number | null = null;
-  @Input({required: true}) valorGanho: number | null = null;
 }

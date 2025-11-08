@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './card-apresentacao-produto-comparado.scss',
 })
 export class CardApresentacaoProdutoComparado {
+  @Input({required: true}) indice!: number;
   @Input({required: true}) dadosProduto!: ProdutoInfoDTO;
   @Input({required: true}) produtosComMesmoCustoPorKg!: boolean;
 

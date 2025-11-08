@@ -7,14 +7,13 @@ import {
   FormBuilder,
   FormGroup,
   FormsModule,
-  ReactiveFormsModule,
-  Validators,
+  ReactiveFormsModule
 } from '@angular/forms';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 import {
   OPTIONS_CURRENCY_MASK,
   OPTIONS_CURRENCY_MASK_TO_WEIGHT,
 } from '../../../../shared/utils/constants';
-import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 @Component({
   selector: 'app-produto-comparado',

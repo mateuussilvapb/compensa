@@ -7,7 +7,7 @@
     @if (dadosProduto.isMaisVantajoso) {
       <i class="pi pi-chart-line mr-1 text-green-600 font-medium"></i>
     }
-    {{dadosProduto.nomeProduto}}
+    {{dadosProduto.nomeProduto || 'Produto ' + indice}}
   </div>
 
   <div class="my-3 text-sm text-500">

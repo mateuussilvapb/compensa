@@ -17,6 +17,12 @@ export const routes: Routes = [
     children: CORE_ROUTES,
   },
   {
+    path: 'lista-compras',
+    canActivate: [AuthGuard],
+    loadComponent: () => import('./core/layout/layout').then((c) => c.Layout),
+    children: CORE_ROUTES,
+  },
+  {
     path: '**',
     redirectTo: '', // manda para o login (raiz)
   },

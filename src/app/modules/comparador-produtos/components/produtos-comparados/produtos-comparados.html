@@ -8,12 +8,14 @@
     <div class="flex w-full flex-column md:flex-row">
       <div class="md:w-full md:pr-2">
         <app-card-apresentacao-produto-comparado
+          [indice]="1"
           [dadosProduto]="this.infoProduto1"
           [produtosComMesmoCustoPorKg]="produtosComMesmoCustoPorKg"
-        ></app-card-apresentacao-produto-comparado>
-      </div>
-      <div class="md:w-full md:pl-2 md:pt-0 pt-3">
-        <app-card-apresentacao-produto-comparado
+          ></app-card-apresentacao-produto-comparado>
+        </div>
+        <div class="md:w-full md:pl-2 md:pt-0 pt-3">
+          <app-card-apresentacao-produto-comparado
+          [indice]="2"
           [dadosProduto]="this.infoProduto2"
           [produtosComMesmoCustoPorKg]="produtosComMesmoCustoPorKg"
         ></app-card-apresentacao-produto-comparado>
@@ -24,6 +26,7 @@
   <app-card-resultado-produto-mais-vantajoso
     [valorGanho]="valorGanho"
     [percentualGanho]="percentualGanho"
+    [indice]="indiceProdutoMaisVantajoso"
     [produtoMaisVantajoso]="produtoMaisVantajoso"
     [produtosComMesmoCustoPorKg]="produtosComMesmoCustoPorKg"
   ></app-card-resultado-produto-mais-vantajoso>
