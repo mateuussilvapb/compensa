@@ -13,7 +13,7 @@ import { PRIMENG_PROVIDER } from './config/providers/primeng.provider';
 
 registerLocaleData(localePt, 'pt-BR');
 
-const firebaseConfig = (globalThis as any).runtimeConfig.firebaseConfig;
+const firebaseConfig = (globalThis as any)?.runtimeConfig?.firebaseConfig || {};
 
 export const appConfig: ApplicationConfig = {
   providers: [
