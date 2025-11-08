@@ -7,4 +7,4 @@ echo "{
     \"messagingSenderId\": \"${NG_APP_FIREBASE_MESSAGING_SENDER_ID}\",
     \"appId\": \"${NG_APP_FIREBASE_APP_ID}\"
   }
-}" > dist/compensa/src/assets/config/config.json
+}" > dist/compensa/browser/assets/config/config.json
