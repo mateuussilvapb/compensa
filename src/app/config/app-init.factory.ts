@@ -7,7 +7,7 @@ export function initializeAppConfig(): () => Promise<void> {
       })
       .then(config => {
         (globalThis as any).runtimeConfig = config;
-        console.log('✅ Config carregado:', config);
+        console.log('✅ Config carregado');
       })
       .catch(err => {
         console.error('❌ Erro ao carregar configuração:', err);
