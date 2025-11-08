@@ -37,10 +37,7 @@
               "includePaths": [
                 "src/scss"
               ]
-            },
-            "scripts": [
-              "scripts/check-env.js"
-            ]
+            }
           },
           "configurations": {
             "production": {
