@@ -1,0 +1,87 @@
+@if (produto) {
+  @if (produtoEmEdicao) {
+    <!-- Aqui vai o template para edição do produto -->
+    <div class="flex flex-column border-1 border-round-2xl p-3 gap-2 border-400 surface-50">
+      <!-- Campos de edição -->
+      <div class="grid">
+         <div class="md:col-6 xl:col-4 col-12 flex-column">
+            <label for="nome_produto_id">Nome</label>
+           <input id="nome_produto_id" type="text" pInputText [(ngModel)]="produto.name" placeholder="Nome do Produto" class="w-full" />
+         </div>
+         <div class="md:col-6 xl:col-4 col-12 flex-column">
+           <label for="quantidade_produto_id">Quantidade</label>
+           <p-inputnumber id="quantidade_produto_id" [(ngModel)]="produto.quantity" mode="decimal" [useGrouping]="false" placeholder="Quantidade (opcional)" class="w-full" />
+          </div>
+          <div class="md:col-6 xl:col-4 col-12 flex-column">
+           <label for="peso_produto_id">Peso</label>
+           <p-inputnumber id="peso_produto_id" [(ngModel)]="produto.weight" placeholder="Peso (opcional)" class="w-full" [minFractionDigits]="2" [maxFractionDigits]="2"/>
+          </div>
+          <div class="md:col-6 xl:col-4 col-12 flex-column">
+          <label for="preco_produto_id">Preço</label>
+          <p-inputnumber id="preco_produto_id" [(ngModel)]="produto.price" mode="currency" currency="BRL" locale="pt-BR" placeholder="Preço (opcional)" class="w-full" />
+        </div>
+        <div class="md:col-6 xl:col-4 col-12 flex-column">
+          <label for="tipo_produto_id">Tipo</label>
+          <p-select id="tipo_produto_id" [options]="typeOptions" placeholder="Tipo (opcional)" [(ngModel)]="produto.type" class="w-full" />
+        </div>
+      </div>
+      <!-- Botões de ação -->
+      <div class="flex md:justify-content-end justify-content-center gap-2 mt-3">
+        <button (click)="onCancelarEdicao()" class="p-button p-component p-button-secondary md:col-2 col-6">Cancelar</button>
+        <button (click)="onSalvarEdicao()" class="p-button p-component p-button-primary md:col-2 col-6">Salvar</button>
+      </div>
+    </div>
+  } @else {
+    <!-- Container principal: mantém bordas e espaçamento -->
+    <div class="flex flex-row border-1 border-round-2xl p-3 gap-2" [ngClass]="produto.checked ? 'border-600 surface-300' : 'border-400 surface-50'">
+      <!-- Wrapper responsivo: column no mobile, row em md+ -->
+      <div class="flex flex-column md:flex-row justify-content-between align-items-start md:align-items-center w-full gap-2">
+
+        <!-- Linha superior (sempre visível): checkbox + nome à esquerda e ícones (mobile) à direita -->
+        <div class="w-full md:w-auto flex justify-content-between align-items-center gap-3">
+          <div class="flex align-items-center gap-3">
+            <p-checkbox inputId="produto_row_id" [(ngModel)]="produto.checked" [binary]="true" (onChange)="updateProdutoChecked()"></p-checkbox>
+            <label for="produto_row_id" class="font-medium text-lg" [ngClass]="produto.checked ? 'line-through' : ''">{{produto.name}}</label>
+          </div>
+
+          <!-- Ícones exibidos apenas no mobile (ocultos em md+) -->
+          <div class="flex align-items-center gap-3 md:hidden">
+            <i class="pi pi-pencil cursor-pointer" (click)="setProdutoEmEdicao()"></i>
+            <i class="pi pi-trash cursor-pointer" (click)="onDeleteProduto()"></i>
+          </div>
+        </div>
+
+        <!-- Linha das badges (quantidade, peso, preço) -->
+        @if (produto.quantity || produto.weight || produto.price) {
+          <div class="w-full md:w-auto flex flex-column md:flex-row justify-content-between md:justify-content-end md:align-items-center gap-1 mt-2 md:mt-0">
+            @if (produto.quantity) {
+              <div class="badge surface-500 border-round-md px-2 py-1 text-xs text-white font-bold w-full md:w-auto text-center">
+                <span class="badge-text">Quantidade: {{produto.quantity}}</span>
+              </div>
+            }
+            @if (produto.weight) {
+              <div class="surface-500 border-round-md px-2 py-1 text-xs text-white font-bold w-full md:w-auto text-center">
+                <span class="badge-text">Peso: {{produto.weight | number:'1.2-2'}}
+                  @if (produto.type) {
+                    {{produto.type}}
+                  }
+                </span>
+              </div>
+            }
+            @if (produto.price) {
+              <div class="badge surface-500 border-round-md px-2 py-1 text-xs text-white font-bold w-full md:w-auto text-center">
+                <span class="badge-text">Preço: {{produto.price | currency:'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
+              </div>
+            }
+          </div>
+        }
+      </div>
+      <!-- Ícones exibidos apenas em md+ (desktop/tablet), posicionados após as badges -->
+      <div class="hidden md:flex align-items-center gap-3">
+        <i class="pi pi-pencil cursor-pointer" (click)="setProdutoEmEdicao()"></i>
+        <i class="pi pi-trash cursor-pointer" (click)="onDeleteProduto()"></i>
+      </div>
+
+    </div>
+  }
+}

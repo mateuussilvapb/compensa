@@ -1,0 +1,58 @@
+@if (loading$ | async) {
+  <div class="flex flex-row justify-content-center align-items-center w-full" style="height: 500px !important;">
+    <p-progress-spinner ariaLabel="loading" />
+  </div>
+} @else {
+  <div class="flex w-full flex-column md:flex-row md:px-8 mb-4">
+    <p-card class="w-full" styleClass="w-full">
+      <div class="font-bold text-xl flex align-items-center">
+        <div class="icon-wrapper flex justify-content-center align-items-center border-round-md text-white w-2rem h-2rem mr-3">
+          <i class="pi pi-list text-lg" title="Lista de Compras"></i>
+        </div>
+        <div class="flex flex-column">
+          <div>
+            Lista de Compras
+          </div>
+          <small class="font-light">
+            {{getItemsChecked}} de {{totalItems}} itens marcados
+          </small>
+        </div>
+      </div>
+    </p-card>
+  </div>
+
+  <div class="flex w-full flex-column md:px-8 mb-4">
+    <div class="w-full flex flex-column md:flex-row mb-4">
+      <app-buscar-produtos
+        class="w-full"
+        [itemsList]="sectionsWithItemsArray"
+        (filteredItemsList)="filterList($event)"
+      ></app-buscar-produtos>
+    </div>
+    <div class="w-full mb-4">
+      <app-adicionar-categoria
+        (adicionarCategoria)="onAdicionarCategoria($event)"
+      ></app-adicionar-categoria>
+    </div>
+    <div class="w-full mb-4">
+      <app-adicionar-produto
+        [itemsList]="sectionsWithItemsArray"
+        (adicionarProduto)="onAdicionarProduto($event)"
+      ></app-adicionar-produto>
+    </div>
+    <div class="w-full mb-4">
+      @if (sectionsWithItemsArray.length > 0) {
+        <app-listagem-produtos
+          [itemsList]="sectionsWithItemsArrayFiltered"
+        ></app-listagem-produtos>
+      }
+    </div>
+  </div>
+}
+
+@if (false) {
+  <pre>{{this.sectionsWithItemsArrayFiltered | json}}</pre>
+}
+@if (false) {
+  <pre>{{this.sectionsWithItemsArray | json}}</pre>
+}

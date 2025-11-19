@@ -27,3 +27,11 @@
     opacity: 1;
   }
 }
+
+.icon-wrapper {
+  background: linear-gradient(135deg, $verde_principal, $azul_principal);
+}
+
+.p-overlay-mask-enter{
+  z-index: 100000000 !important;
+}

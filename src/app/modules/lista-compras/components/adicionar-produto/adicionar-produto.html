@@ -1,0 +1,54 @@
+@if (hasAnyCategory) {
+  <p-card header="Adicionar Produto">
+    <form [formGroup]="form" class="flex flex-column gap-2">
+      <div class="grid">
+        <div class="md:col-6 xl:col-4 col-12 flex-column">
+          <label for="categoria_produto_id">Categoria*</label>
+          <p-select id="categoria_produto_id" [options]="categoriaOptions" optionLabel="name" placeholder="Selecione uma categoria" formControlName="category" class="w-full" />
+        </div>
+        <div class="md:col-6 xl:col-4 col-12 flex-column">
+          <label for="nome_produto_id">Nome*</label>
+          <input id="nome_produto_id" type="text" pInputText formControlName="name" placeholder="Nome do Produto" class="w-full" />
+        </div>
+        <div class="md:col-6 xl:col-4 col-12 flex-column">
+          <label for="quantidade_produto_id">Quantidade</label>
+          <p-inputnumber id="quantidade_produto_id" formControlName="quantity" mode="decimal" [useGrouping]="false" placeholder="Quantidade (opcional)" class="w-full" />
+        </div>
+        <div class="md:col-6 xl:col-4 col-12 flex-column">
+          <label for="peso_produto_id">Peso</label>
+          <p-inputnumber id="peso_produto_id" formControlName="weight" placeholder="Peso (opcional)" class="w-full" [minFractionDigits]="2" [maxFractionDigits]="2"/>
+        </div>
+        <div class="md:col-6 xl:col-4 col-12 flex-column">
+          <label for="preco_produto_id">Preço</label>
+          <p-inputnumber id="preco_produto_id" formControlName="price" mode="currency" currency="BRL" locale="pt-BR" placeholder="Preço (opcional)" class="w-full" />
+        </div>
+        <div class="md:col-6 xl:col-4 col-12 flex-column">
+          <label for="tipo_produto_id">Tipo</label>
+          <p-select id="tipo_produto_id" [options]="typeOptions" placeholder="Tipo (opcional)" formControlName="type" class="w-full" />
+        </div>
+      </div>
+      <div class="flex flex-row justify-content-end w-full">
+        <button pButton class="button-style w-full md:w-auto" (click)="onAdicionarProduto()" [disabled]="form.invalid">
+          <i class="pi pi-plus-circle" pButtonIcon></i>
+          <span pButtonLabel>Adicionar</span>
+        </button>
+      </div>
+    </form>
+  </p-card>
+} @else {
+  <p-card>
+    <div class="p-5 flex flex-column align-items-center justify-content-center">
+      <i class="pi pi-box text-6xl text-500"></i>
+      <p class="text-center font-medium text-xl">Nenhuma categoria criada</p>
+      <p class="text-center font-light text-lg my-0">
+        Comece criando uma categoria para organizar seus produtos.
+      </p>
+    </div>
+  </p-card>
+}
+
+
+@if (false) {
+  <pre>{{this.form.value | json}}</pre>
+  <pre>{{this.categoriaOptions | json}}</pre>
+}

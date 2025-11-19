@@ -1,3 +1,4 @@
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ApplicationConfig, APP_INITIALIZER, LOCALE_ID, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { registerLocaleData } from '@angular/common';
@@ -10,6 +11,8 @@ import { provideOAuthClient } from 'angular-oauth2-oidc';
 import { routes } from './app.routes';
 import { PRIMENG_PROVIDER } from './config/providers/primeng.provider';
 import { initializeAppConfig } from './config/app-init.factory';
+import { DialogService } from 'primeng/dynamicdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -17,7 +20,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     // Garante que o config.json seja carregado antes de tudo
     { provide: APP_INITIALIZER, useFactory: initializeAppConfig, multi: true },
-
+    provideAnimationsAsync(),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
@@ -29,6 +32,9 @@ export const appConfig: ApplicationConfig = {
       initializeApp((globalThis as any).runtimeConfig?.firebaseConfig)
     ),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    DialogService,
+    MessageService,
+    ConfirmationService,
   ]
 };

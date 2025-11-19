@@ -1,0 +1,17 @@
+<p-card header="Adicionar Categoria">
+  <div class="flex flex-column md:flex-row">
+    <input
+      pInputText
+      type="text"
+      pSize="large"
+      [(ngModel)]="categoria"
+      placeholder="Nome da Categoria"
+      (keypress)="onKeyPressEnterInput($event)"
+      class="w-full md:mr-3 md:mb-0 mb-3"
+    />
+    <button pButton class="button-style" (click)="onAdicionarCategoria()">
+      <i class="pi pi-plus-circle" pButtonIcon></i>
+      <span pButtonLabel>Adicionar</span>
+    </button>
+  </div>
+</p-card>

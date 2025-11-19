@@ -4,10 +4,16 @@ import { ButtonModule } from 'primeng/button';
 import { ProdutoComparado } from '../../components/produto-comparado/produto-comparado';
 import { ProdutosComparados } from '../../components/produtos-comparados/produtos-comparados';
 import { ProdutoInfoDTO } from '../../interfaces/produto-info.dto';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-home-page-comparador',
-  imports: [ProdutoComparado, ButtonModule, ProdutosComparados],
+  imports: [
+    CardModule,
+    ButtonModule,
+    ProdutoComparado,
+    ProdutosComparados,
+  ],
   templateUrl: './home-page-comparador.html',
 })
 export class HomePageComparador implements OnInit {

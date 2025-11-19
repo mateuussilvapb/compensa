@@ -7,20 +7,26 @@ import {
   doc,       // Importado para operações de documento (update/delete)
   setDoc,    // Importado para update/merge
   deleteDoc, // Importado para delete
+  getDocs,
+  writeBatch,
   DocumentReference,
   CollectionReference,
+  updateDoc
 } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { onAuthStateChanged, User } from 'firebase/auth';
+import { ProductOption } from '../../../shared/utils/constants';
 import { defer, from, Observable, switchMap } from 'rxjs';
 
 // --- Interfaces atualizadas ---
 export interface Item {
   id?: string;
   name: string;
-  weight?: number; // Alterado para number para melhor flexibilidade em cálculos
-  price?: number;
-  type?: 'kg' | 'L' | 'ml' | 'g' | 'unidade' | string; // Adicionado 'type' e sugerido alguns valores
+  weight?: number | string; // Alterado para number para melhor flexibilidade em cálculos
+  price?: number | string;
+  checked?: boolean;
+  quantity?: number | string;
+  type?: ProductOption; // Tipado a partir de OPTIONS_TYPE_PRODUCTS (veja shared/utils/constants.ts)
   // Você pode adicionar mais propriedades aqui, como 'checked: boolean', 'quantity: number', etc.
 }
 
@@ -202,6 +208,64 @@ export class ListaCompraService {
       switchMap(user => {
         const itemDocRef = doc(this.firestore, `${this.getUserShoppingListPath(user.uid)}/sections/${sectionId}/items/${itemId}`);
         return from(deleteDoc(itemDocRef));
+      })
+    );
+  }
+
+  /**
+   * Exclui todos os itens de uma seção (em batches de até 500 operações) e, em seguida, exclui o documento da seção.
+   * Observação: o Firestore não oferece um delete "recursivo" no client SDK; portanto fazemos a remoção manual
+   * dos documentos da subcoleção antes de apagar o documento pai.
+   */
+  deleteSectionCascade(sectionId: string): Observable<void> {
+    return defer(() => from(this.waitForUser())).pipe(
+      switchMap(async (user) => {
+        const itemsCollectionRef = collection(
+          this.firestore,
+          `${this.getUserShoppingListPath(user.uid)}/sections/${sectionId}/items`
+        );
+
+        // Obter todos os documentos da subcoleção
+        const snapshot = await getDocs(itemsCollectionRef);
+
+        // Se não houver itens, apenas deletamos o documento da seção
+        const sectionDocRef = doc(this.firestore, `${this.getUserShoppingListPath(user.uid)}/sections/${sectionId}`);
+        if (snapshot.empty) {
+          await deleteDoc(sectionDocRef);
+          return;
+        }
+
+        // Apagar em batches (limite 500 por batch)
+        const commits: Promise<void>[] = [];
+        let batch = writeBatch(this.firestore);
+        let opCount = 0;
+
+        for (const docSnap of snapshot.docs) {
+          batch.delete(docSnap.ref);
+          opCount++;
+          if (opCount >= 500) {
+            commits.push(batch.commit());
+            batch = writeBatch(this.firestore);
+            opCount = 0;
+          }
+        }
+
+        if (opCount > 0) {
+          commits.push(batch.commit().then(() => {}));
+        }
+
+        // Espera todos os commits e depois apaga o documento da seção
+        await Promise.all(commits);
+        await deleteDoc(sectionDocRef);
+      })
+    );
+  }
+
+  updateItemChecked(sectionId: string, itemId: string, checked: boolean): Observable<void> {
+    return defer(() => from(this.waitForUser())).pipe(
+      switchMap(user => {
+        const itemDocRef = doc(this.firestore, `${this.getUserShoppingListPath(user.uid)}/sections/${sectionId}/items/${itemId}`) as DocumentReference<Item>;
+        return from(updateDoc(itemDocRef, { checked }));
       })
     );
   }

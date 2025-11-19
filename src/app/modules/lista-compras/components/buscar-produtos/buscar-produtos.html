@@ -1,0 +1,12 @@
+<p-iconfield>
+  <p-inputicon class="pi pi-search" />
+  <input
+    pInputText
+    type="text"
+    pSize="large"
+    class="w-full"
+    [(ngModel)]="filtro"
+    (keyup)="buscarProdutos()"
+    placeholder="Buscar Produtos..."
+  />
+</p-iconfield>

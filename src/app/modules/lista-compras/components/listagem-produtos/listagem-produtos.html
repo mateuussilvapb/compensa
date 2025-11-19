@@ -1,0 +1,53 @@
+@if (this.itemsList.length > 0) {
+  @for (item of itemsList; track $index) {
+    <p-card class="mb-4">
+      <ng-template #header>
+        <div class="flex flex-row justify-content-between pb-0" style="padding: var(--p-card-body-padding);">
+          <div class="flex-1 mr-3 align-items-center">
+            @if (item.id === categoriaEmEdicao) {
+              <input type="text" pInputText class="w-full" [(ngModel)]="item.name" (blur)="updateSectionName(item)" (keypress)="tratarTeclaPressionada($event)"/>
+            } @else {
+              <p class="m-0 text-xl font-medium font-italic">
+                {{getHeaderCategory(item)}}
+              </p>
+            }
+          </div>
+          <div class="flex flex-row justify-content-end gap-3 align-items-center">
+            <i class="pi pi-pencil cursor-pointer" (click)="setCategoriaEmEdicao(item.id)"></i>
+            <i class="pi pi-trash cursor-pointer" (click)="onDeleteSection(item.id)"></i>
+          </div>
+        </div>
+      </ng-template>
+      <div class="flex flex-column gap-3">
+        @if (item.items.length > 0) {
+          @for (product of item.items; track $index) {
+            <app-produto-row
+              [produto]="product"
+              [sectionId]="item.id"
+              [itemsList]="itemsList"
+              (produtoEditado)="this.ordenarItens()"
+            ></app-produto-row>
+          }
+        } @else {
+          <p class="text-center font-light">Nenhum produto nesta categoria</p>
+        }
+      </div>
+    </p-card>
+  }
+}
+@else {
+  <p-card>
+    <div class="p-5 flex flex-column align-items-center justify-content-center">
+      <i class="pi pi-box text-6xl text-500"></i>
+      <p class="text-center font-medium text-xl">A pesquisa não retornou produtos</p>
+      <p class="text-center font-light text-lg my-0">
+        Tente ajustar os termos da pesquisa para encontrar o que procura.
+      </p>
+    </div>
+  </p-card>
+}
+
+
+@if (false) {
+  <pre>{{this.itemsList | json}}</pre>
+}
